@@ -41,7 +41,7 @@ const App = () => {
     }
   };
 
-  const handleDelete = id =>
+  const contactDelete = id =>
     setContacts(prev => prev.filter(el => el.id !== id));
 
   return (
@@ -52,7 +52,7 @@ const App = () => {
       <Filter changeFilter={changeFilter} value={filter} />
       <ContactList
         userContacts={getVisibleContact()}
-        handleDelete={handleDelete}
+        handleDelete={contactDelete}
       />
     </div>
   );
