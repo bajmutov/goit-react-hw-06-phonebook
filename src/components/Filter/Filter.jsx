@@ -1,4 +1,12 @@
-const Filter = ({ changeFilter, value }) => {
+import { useDispatch, useSelector } from 'react-redux';
+import { changeFilter } from 'redux/filtersSlice';
+import { getFilter } from 'redux/selectors';
+
+const Filter = () => {
+  const filterContact = useSelector(getFilter);
+  const dispatch = useDispatch();
+  const handleFilterChange = e => dispatch(changeFilter(e.currentTarget.value));
+
   return (
     <div>
       <label htmlFor="findContact" className="form-label">
@@ -8,8 +16,8 @@ const Filter = ({ changeFilter, value }) => {
         className="form-input filterInput"
         name="title"
         type="text"
-        onChange={changeFilter}
-        value={value}
+        onChange={handleFilterChange}
+        value={filterContact}
         id="findContact"
         placeholder="Jacob Mercer"
       />

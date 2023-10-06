@@ -1,8 +1,14 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from 'redux/contactsSlice';
+import { getContacts } from 'redux/selectors';
 
-const ContactForm = ({ addContact }) => {
+const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+
+  const contacts = useSelector(getContacts);
+  const dispatch = useDispatch();
 
   const handleChange = ({ target }) => {
     if (target.name === 'name') setName(target.value);
@@ -11,11 +17,14 @@ const ContactForm = ({ addContact }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    addContact(name, number);
-    reset();
+    const isAlreadyExist = contacts.find(el => el.name === name);
+    if (isAlreadyExist) return alert(`${name} is already in contacts`);
+    console.log('data', contacts);
+    dispatch(addContact(name, number));
+    resetForm();
   };
 
-  const reset = () => {
+  const resetForm = () => {
     setName('');
     setNumber('');
   };
