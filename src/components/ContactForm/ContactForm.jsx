@@ -19,7 +19,6 @@ const ContactForm = () => {
     e.preventDefault();
     const isAlreadyExist = contacts.find(el => el.name === name);
     if (isAlreadyExist) return alert(`${name} is already in contacts`);
-    console.log('data', contacts);
     dispatch(addContact(name, number));
     resetForm();
   };
